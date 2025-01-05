@@ -6,8 +6,9 @@ import sys
 
 HEADER = "\033[95m"
 ENDC = "\033[0m"
+FAIL = "\033[91m"
 
-def get_weather_by_zip(zip_code, api_key):
+def get_weather_by_zip(zip_code: int, api_key : str):
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
         "zip": f"{zip_code},us",
@@ -61,4 +62,4 @@ if __name__ == "__main__":
         print(f"Sunrise: {sunrise.strftime("%H:%M:%S")}")
         print(f"Sunset: {sunset.strftime("%H:%M:%S")}")
     else:
-        print("Failed to retrieve weather data.")
+        print(f"{FAIL}Failed to retrieve weather data.")
