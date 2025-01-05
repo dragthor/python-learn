@@ -4,9 +4,10 @@ import sys
 
 # Usage: python3 weather.py <api_key> <zip_code>
 
-HEADER = "\033[95m"
-ENDC = "\033[0m"
-FAIL = "\033[91m"
+class colors:
+    HEADER = "\033[95m"
+    ENDC = "\033[0m"
+    FAIL = "\033[91m"
 
 def get_weather_by_zip(zip_code: int, api_key : str):
     base_url = "http://api.openweathermap.org/data/2.5/weather"
@@ -23,6 +24,7 @@ def get_weather_by_zip(zip_code: int, api_key : str):
 
 if __name__ == "__main__":
     zip_code = "08869" # Default to the coolest town in NJ.
+    api_key = ""
 
     if len(sys.argv) > 2:
         api_key = sys.argv[1] # Your OpenWeatherMap API key
@@ -52,7 +54,7 @@ if __name__ == "__main__":
         sunrise = datetime.datetime.fromtimestamp(weather_data["sys"]["sunrise"])
         sunset = datetime.datetime.fromtimestamp(weather_data["sys"]["sunset"])
 
-        print(f"{HEADER}Currently in {city} {zip_code}{ENDC}")
+        print(f"{colors.HEADER}Currently in {city} {zip_code}{colors.ENDC}")
         print(f"Temperature: {temperature}°F")
         print(f"Feels like: {feels_like}°F")
         print(f"Humidity: {humidity}%")
@@ -62,4 +64,4 @@ if __name__ == "__main__":
         print(f"Sunrise: {sunrise.strftime("%H:%M:%S")}")
         print(f"Sunset: {sunset.strftime("%H:%M:%S")}")
     else:
-        print(f"{FAIL}Failed to retrieve weather data.")
+        print(f"{colors.FAIL}Failed to retrieve weather data.{colors.ENDC}")
