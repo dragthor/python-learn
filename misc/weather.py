@@ -2,7 +2,8 @@ import requests
 import datetime
 import sys
 
-API_KEY = ""  # Replace with your OpenWeatherMap API key
+# Usage: python3 weather.py <api_key> <zip_code>
+
 HEADER = "\033[95m"
 ENDC = "\033[0m"
 
@@ -20,12 +21,25 @@ def get_weather_by_zip(zip_code, api_key):
         return None
 
 if __name__ == "__main__":
-    zip_code = "08869"
+    zip_code = "08869" # Default to the coolest town in NJ.
 
-    if len(sys.argv) > 1:
-        zip_code = sys.argv[1] # Your USA zip code
+    if len(sys.argv) > 2:
+        api_key = sys.argv[1] # Your OpenWeatherMap API key
+        zip_code = sys.argv[2] # Your USA zip code
 
-    weather_data = get_weather_by_zip(zip_code, API_KEY)
+    if len(zip_code) != 5:
+        print("Error: Zip code must be 5 characters long.")
+        sys.exit(1)
+        
+    if not zip_code.isdigit():
+        print("Error: Zip code must be numeric.")
+        sys.exit(1)
+
+    if (len(api_key) <= 0):
+        print("Error: API key is required.")
+        sys.exit(1)
+
+    weather_data = get_weather_by_zip(zip_code, api_key)
     if weather_data:
         city = weather_data["name"]
         temperature = weather_data["main"]["temp"]
@@ -47,4 +61,4 @@ if __name__ == "__main__":
         print(f"Sunrise: {sunrise.strftime("%H:%M:%S")}")
         print(f"Sunset: {sunset.strftime("%H:%M:%S")}")
     else:
-        print("Failed to retrieve weather data")
+        print("Failed to retrieve weather data.")
