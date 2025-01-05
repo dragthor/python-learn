@@ -6,5 +6,7 @@ Authors - Gries, Campbell, Montojo
 
 ## Tools
 
-python 3.12.3
-pip 24.0
+* python 3.12.3
+* pip 24.0
+* Visual Studio Code
+* Ubuntu
